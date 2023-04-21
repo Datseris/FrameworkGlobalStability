@@ -10,7 +10,8 @@ include(srcdir("vis", "basins_plotting.jl"))
 # %%
 fig, axs = subplotgrid(2, 2; sharex = true, xlabels = "parameter",
     # titles = ["BifurcationKit.jl", "Attractors.jl"],
-    titles = ["Linearized bifurcation continuation", "Recurrences-based continuation"],
+    titles = ["Traditional continuation-based bifurcation analysis (CBA)",
+    "Recurrences-based attractor find-and-match continuation (RAFM)"],
 	# ylabels = ["max(E) - step 1", "max(E) - step 2"],
     resolution = (1600, 600)
 )
@@ -21,6 +22,11 @@ ylims!(axs[2, 1], (0, 25))
 axs[1, 2].ylabel = "fractions %"
 axs[2, 2].ylabel = "max(attractor)"
 ylims!(axs[2, 2], (0, 25))
+# reduce fontsize of axis titles slightly (they are so long)
+axs[1, 1].titlesize = axs[1, 1].titlesize[] - 2
+axs[1, 2].titlesize = axs[1, 2].titlesize[] - 2
+
+fig
 
 # left comumn is BifurcationKit.jl
 
@@ -29,7 +35,7 @@ ylims!(axs[2, 2], (0, 25))
 for ax in axs[:, 1]
 for (p, E, s) in zip(curvesp_fp, curvesE_fp, stabilities_fp)
     lines!(ax, p, E;
-        linestyle = s ? :solid : :dash, color = COLORS[2],
+        linestyle = s ? :solid : :dot, color = COLORS[2],
         label = s ? "stable" : "unstable", linewidth = 4,
     )
 end
@@ -77,7 +83,7 @@ legend_entries = String[]
 k = 0
 for (p, E, s) in zip(curvesp_lc, curvesE_lc, stabilities_lc)
 	l = lines!(ax, p, E;
-		linestyle = s ? :solid : :dash, color = COLORS[1],
+		linestyle = s ? :solid : :dot, color = COLORS[1],
         linewidth = 4,
 	)
 	if s && k < 1

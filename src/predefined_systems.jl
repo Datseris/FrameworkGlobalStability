@@ -5,6 +5,13 @@ const diffeq_fast = (alg = Tsit5(), reltol = 1e-6, abstol = 1e-6)
 const diffeq_slow = (alg = Vern9(), reltol = 1e-9, abstol = 1e-9)
 diffeq_default = diffeq_slow # choose high accuracy by default
 
+# Henon map
+function henon(u0=zeros(2); a = 1.4, b = 0.3)
+    return DeterministicIteratedMap(henon_rule, u0, [a,b])
+end # should give lyapunov exponents [0.4189, -1.6229]
+henon_rule(x, p, n) = SVector{2}(1.0 - p[1]*x[1]^2 + x[2], p[2]*x[1])
+henon_jacob(x, p, n) = SMatrix{2,2}(-2*p[1]*x[1], p[2], 1.0, 0.0)
+
 # Lorenz 84
 function lorenz84(u = [0.1, 0.1, 0.1]; F=6.846, G=1.287, a=0.25, b=4.0)
     return CoupledODEs(lorenz84_rule, u, [F, G, a, b]; diffeq = diffeq_default)

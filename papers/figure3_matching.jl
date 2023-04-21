@@ -3,7 +3,6 @@ using DrWatson
 using Attractors, OrdinaryDiffEq, CairoMakie
 using Random
 using Graphs
-using PredefinedDynamicalSystems
 include(srcdir("vis", "basins_plotting.jl"))
 include(srcdir("vis", "figs_kuramoto.jl"))
 include(srcdir("predefined_systems.jl"))
@@ -19,7 +18,7 @@ N = samples_per_parameter = 1000
 P = total_parameter_values = 101
 
 # 1. Henon
-ds = Systems.henon(; b = 0.3, a = 1.4)
+ds = henon(; b = 0.3, a = 1.4)
 prange = range(1.2, 1.25; length = P)
 acritical = 1.2265
 
