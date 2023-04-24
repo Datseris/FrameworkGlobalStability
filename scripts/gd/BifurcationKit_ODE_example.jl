@@ -79,7 +79,7 @@ fig
 # %% Basins fractions
 E0_range = range(-2, -0.9; length = 101)
 
-rsc = RecurrencesSeededContinuation(mapper)
+rsc = RecurrencesFindAndMatch(mapper)
 
 fractions_curves, attractors_info = continuation(
     rsc, E0_range, :E0, sampler, samples_per_parameter = 1000,

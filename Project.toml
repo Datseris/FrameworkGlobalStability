@@ -17,6 +17,6 @@ StateSpaceSets = "40b095a5-5852-4c12-98c7-d43bf788e795"
 
 [compat]
 DrWatson = "2.7.5"
-Attractors = "1.2.7"
+Attractors = "1.4.0"
 # BifurcationKit = "0.2.6" # requires new release for code to actually work.
 julia = "1.7.0"

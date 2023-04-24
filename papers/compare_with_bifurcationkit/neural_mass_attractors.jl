@@ -63,7 +63,7 @@ set_parameter!(neural_mass, :E0, -1.472)
 # Basins fractions
 E0_range = range(-2, -0.9; length = 101)
 
-rsc = RecurrencesSeededContinuation(mapper;
+rsc = RecurrencesFindAndMatch(mapper;
 	threshold = 3.0,
 	# Here we use a special distance: the distance between
 	# maximum value of first dimension of attractors

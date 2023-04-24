@@ -16,7 +16,7 @@ display(fig)
 
 # Population dynamics recurrences continuation. It uses the DrWatson integration
 # pipeline to not re-compute things. But all in all, it is a direct call to
-# `RecurrencesSeededContinuation` with default matching behavior
+# `RecurrencesFindAndMatch` with default matching behavior
 # (distance in state space). **No special matching or metric is used here!!!**
 ds = competition()
 mapper_config = (; Δt= 1.0, mx_chk_fnd_att=9);

@@ -41,7 +41,7 @@ mapper = AttractorsViaRecurrences(ds, (xg, yg),
     mx_chk_fnd_att = 3000,
     mx_chk_loc_att = 3000
 )
-cont= RecurrencesSeededContinuation(mapper;
+cont= RecurrencesFindAndMatch(mapper;
     threshold = 0.99, distance = distance_function
 )
 fractions_curves, attractors_info = continuation(
@@ -112,7 +112,7 @@ sampler, = statespace_sampler(Random.MersenneTwister(1234);
 
 function continuation_problem(di)
     @unpack Nd, N = di
-    group_cont = GroupAcrossParameterContinuation(mapper)
+    group_cont = GroupAcrossParameter(mapper)
     fractions_curves, attractors_info = continuation(
             group_cont, Krange, Kidx, sampler;
             show_progress = true, samples_per_parameter = N)
@@ -202,7 +202,7 @@ function kuramoto_problem(di)
         min_bounds = -pi*ones(Nd), max_bounds = pi*ones(Nd)
     )
 
-    group_cont = GroupAcrossParameterContinuation(mapper)
+    group_cont = GroupAcrossParameter(mapper)
     Kidx = :K
     Krange = range(0., 2; length = 40)
     fractions_curves, attractors_info = continuation(

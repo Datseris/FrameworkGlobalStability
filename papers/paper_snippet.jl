@@ -33,7 +33,7 @@ mapper = AttractorsViaRecurrences(ds, grid;
 prange = range(1.34, 1.37; length = 101)
 pidx = 2 # index of parameter
 sampler = statespace_sampler(grid)[1]
-rsc = RecurrencesSeededContinuation(mapper)
+rsc = RecurrencesFindAndMatch(mapper)
 
 fractions_curves, attractors_info = continuation(
     rsc, prange, pidx, sampler

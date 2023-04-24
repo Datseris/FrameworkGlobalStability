@@ -16,10 +16,10 @@ struct FractionsRecurrencesConfig
     threshold::Float64 # `Inf` by default
     sampler::Function # grid bounds by default
 end
-FractionsRecurrencesConfig(a,b,c,d,e,f,g) = 
+FractionsRecurrencesConfig(a,b,c,d,e,f,g) =
             FractionsRecurrencesConfig(
-                        a,b,c,d,e,f,g,Inf, 
-                        statespace_sampler(Random.MersenneTwister(1234); 
+                        a,b,c,d,e,f,g,Inf,
+                        statespace_sampler(Random.MersenneTwister(1234);
                         min_bounds = minimum.(e), max_bounds = maximum.(e))[1]
                 )
 
@@ -48,7 +48,7 @@ function fractions_produce_or_load_f(config::FractionsRecurrencesConfig)
     # )
     sampler = config.sampler
 
-    rsc = RecurrencesSeededContinuation(mapper;
+    rsc = RecurrencesFindAndMatch(mapper;
         threshold = config.threshold
     )
 
