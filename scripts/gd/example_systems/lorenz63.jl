@@ -34,7 +34,7 @@ mapper = AttractorsViaRecurrencesSparse(ds, grid;
 prange = range(22.0, 28.0; length = 101)
 pidx = 2
 # threshold = 0.01 is the ε value we give at the mapper test
-continuation = RecurrencesSeedingContinuation(mapper; threshold = Inf)
+continuation = RAFM(mapper; threshold = Inf)
 fractions_curves, attractors_info = basins_fractions_continuation(
     continuation, prange, pidx, sampler;
     show_progress = true, samples_per_parameter = 100

@@ -33,10 +33,10 @@ mapper = AttractorsViaRecurrences(ds, grid;
 prange = range(1.34, 1.37; length = 101)
 pidx = 2 # index of parameter
 sampler = statespace_sampler(grid)[1]
-rsc = RecurrencesFindAndMatch(mapper)
+rafm = RecurrencesFindAndMatch(mapper)
 
 fractions_curves, attractors_info = continuation(
-    rsc, prange, pidx, sampler
+    rafm, prange, pidx, sampler
 )
 
 # Estimate Lyapunov spectra for all attractors
@@ -45,7 +45,30 @@ lyapunovs_curves = map(eachindex(prange)) do index
     set_parameter!(ds, pidx, prange[index])
     attractor_dict = attractors_info[index]
     exponents = Dict(
-        k => lyapunovspectrum(ds, 10000; u0 = A[1])
-        for (k, A) in attractor_dict
+        id => lyapunovspectrum(ds, 10000; u0 = A[1])
+        for (id, A) in attractor_dict
     )
 end
+
+# %% Animation (not in the paper)
+animate_attractors_continuation(
+    ds, attractors_info, fractions_curves, prange, pidx;
+    savename = "lorenz84.mp4", access = [1,3],
+    limits = (-1,3,-2,2),
+    markersize = 10,
+)
+
+# %% Plot everything together
+fig = basins_curves_plot(fractions_curves, prange;
+    axislegend_kwargs = (position = :lb,)
+)
+axl = Axis(fig[0,1])
+axl.ylabel = "λ₁ + λ₂"
+hidexdecorations!(axl; grid = false)
+
+lyap_to_real(L) = L[1]+L[2]
+attractors_curves_plot!(axl, lyapunovs_curves, lyap_to_real, prange;
+    axislegend_kwargs = (position = :cb,)
+)
+
+fig

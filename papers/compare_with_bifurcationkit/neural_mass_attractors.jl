@@ -3,8 +3,6 @@ using DrWatson
 using Attractors
 using OrdinaryDiffEq: Vern9
 
-include(srcdir("vis", "basins_plotting.jl"))
-
 # Neural mass model as in
 # https://bifurcationkit.github.io/BifurcationKitDocs.jl/stable/tutorials/ode/tutorialsODE/#Neural-mass-equation-(Hopf-aBS)
 
@@ -84,6 +82,6 @@ attractor_to_real = A -> maximum(x[1] for x in A)
 # attractors_curves_plot(attractors_info, attractor_to_real, E0_range)
 
 # plot both!
-fig = basins_attractors_curves_plot(fractions_curves, attractors_info, attractor_to_real, E0_range)
+fig = plot_basins_attractors_curves(fractions_curves, attractors_info, attractor_to_real, E0_range)
 wsave(papersdir("figures", "neuralmass_attractors.png"), fig)
 fig

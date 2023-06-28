@@ -112,7 +112,7 @@ sampler, = statespace_sampler(Random.MersenneTwister(1234);
 
 function continuation_problem(di)
     @unpack Nd, N = di
-    group_cont = GroupAcrossParameter(mapper)
+    group_cont = FeaturizeGroupAcrossParameter(mapper)
     fractions_curves, attractors_info = continuation(
             group_cont, Krange, Kidx, sampler;
             show_progress = true, samples_per_parameter = N)
@@ -202,7 +202,7 @@ function kuramoto_problem(di)
         min_bounds = -pi*ones(Nd), max_bounds = pi*ones(Nd)
     )
 
-    group_cont = GroupAcrossParameter(mapper)
+    group_cont = FeaturizeGroupAcrossParameter(mapper)
     Kidx = :K
     Krange = range(0., 2; length = 40)
     fractions_curves, attractors_info = continuation(

@@ -212,7 +212,7 @@ let
     sampler, = statespace_sampler(Random.MersenneTwister(1234);
         min_bounds = [-pi*ones(N) -12*ones(N)], max_bounds = [pi*ones(N) 12*ones(N)]
         )
-    continuation = RecurrencesSeedingContinuation(mapper)
+    continuation = RAFM(mapper)
     Kidx = 3
     Krange = range(0., 10; length = 20)
     fractions_curves, attractors_info = basins_fractions_continuation(

@@ -102,7 +102,7 @@ pidx = :K
 
 mapper = AttractorsViaRecurrences(psys, grid; Δt = 0.1, recurrence_kwargs...)
 
-continuation = RecurrencesSeedingContinuation(mapper; threshold = Inf)
+continuation = RAFM(mapper; threshold = Inf)
 
 fractions_curves, attractors_info = basins_fractions_continuation(
     continuation, prange, pidx;

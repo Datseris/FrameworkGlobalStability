@@ -1,6 +1,7 @@
 using DrWatson
-@quickactivate "FrameworkGlobalStability"
 using Attractors
+using PredefinedDynamicalSystems
+@quickactivate "FrameworkGlobalStability"
 using LinearAlgebra: norm
 include(srcdir("vis", "basins_plotting.jl"))
 
@@ -16,7 +17,7 @@ pidx = :γs
 # test that both finding and removing attractor works
 mapper = AttractorsViaRecurrences(ds, (xg, yg); Δt = 1.0)
 sampler, = statespace_sampler(; min_bounds = [-3,-3], max_bounds = [3,3])
-continuation = RecurrencesSeedingContinuation(mapper; threshold = Inf)
+continuation = RAFM(mapper; threshold = Inf)
 # With this threshold all attractors are mapped to each other, they are within
 # distance 1 in state space.
 fractions_curves, attractors_info = basins_fractions_continuation(

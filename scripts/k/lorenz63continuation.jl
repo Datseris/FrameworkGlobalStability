@@ -44,7 +44,7 @@ sampler, = statespace_sampler(Random.MersenneTwister(1234);
     min_bounds = [-40,-40,-40], max_bounds = [40, 40, 40]
 )
 
-continuation = RecurrencesSeedingContinuation(mapper)
+continuation = RAFM(mapper)
 fractions_curves, attractors_info = basins_fractions_continuation(
     continuation, ps, pidx, sampler;
     show_progress = false, samples_per_parameter = 500

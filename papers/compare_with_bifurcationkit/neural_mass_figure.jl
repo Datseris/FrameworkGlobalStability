@@ -2,10 +2,10 @@
 # and Attractors.jl. It first runs the two dedicated scripts.
 using DrWatson
 @quickactivate "FrameworkGlobalStability"
+using CairoMakie, Attractors
 include(srcdir("vis", "theme.jl"))
 include("neural_mass_bifurcationkit.jl")
 include("neural_mass_attractors.jl")
-include(srcdir("vis", "basins_plotting.jl"))
 
 # %%
 fig, axs = subplotgrid(2, 2; sharex = true, xlabels = "parameter",
@@ -63,8 +63,9 @@ for sp in br.specialpoint
     p = sp.param
     E = sp.x[1]
     scatter!(ax, [p], [E]; markersize = 20,
-        color = point_to_color[t], label = string(t),
-        marker = point_to_marker[t],
+        label = string(t),
+        marker = point_to_marker[t], color = "transparent",
+        strokewidth = 2.5, strokecolor = point_to_color[t],
 
     )
 end
@@ -103,7 +104,7 @@ for sp in br_potrap.γ.specialpoint
 	l = scatter!(ax, [p], [E];
         markersize = 15, color = "transparent", label = string(t),
         marker = point_to_marker[t],
-        strokewidth = 2, strokecolor = point_to_color[t],
+        strokewidth = 2.5, strokecolor = point_to_color[t],
 	)
     if t ∉ (:bp, :hopf) && k < 3
         if t == :ns && !used_ns
@@ -123,7 +124,7 @@ axislegend(ax, legend_elements, legend_entries;
 )
 
 # Right column is Attractors.jl
-basins_attractors_curves_plot!(axs[1, 2], axs[2, 2],
+plot_basins_attractors_curves!(axs[1, 2], axs[2, 2],
     fractions_curves, attractors_info, attractor_to_real, E0_range;
     colors = Dict(-1 => COLORS[3], 1 => COLORS[2], 2 => COLORS[1], 3 => COLORS[4]),
     labels = Dict(-1 => "diverge", 1 => "fixed point", 2 => "limit cycle", 3 => "fixed point"),
@@ -134,7 +135,7 @@ basins_attractors_curves_plot!(axs[1, 2], axs[2, 2],
 fig
 
 
-# notice that a stable periodic orbit exists _before_ the point
+# notice that the stable periodic orbit exists _before_ the point
 # that Bifurcation kit finds it. I've checked extensively, and indeed,
 # there is a really slow converging periodic orbit at a parameter
 # _larger_ than the hopf bifurcation parameter.

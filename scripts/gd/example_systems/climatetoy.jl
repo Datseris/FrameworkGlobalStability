@@ -87,7 +87,7 @@ mapper = AttractorsViaRecurrencesSparse(pinteg, grid;
     diffeq,
 )
 
-continuation = RecurrencesSeedingContinuation(mapper; threshold = Inf)
+continuation = RAFM(mapper; threshold = Inf)
 fractions_curves, attractors_info = basins_fractions_continuation(
     continuation, prange, pidx, sampler;
     show_progress = true, samples_per_parameter = 100

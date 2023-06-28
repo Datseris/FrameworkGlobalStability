@@ -35,7 +35,7 @@ sampler, = statespace_sampler(Random.MersenneTwister(1234);
     min_bounds = [0.0, 0, 0], max_bounds = [50, 50, 50]
 );
 
-continuation = Attractors.RecurrencesSeedingContinuation(mapper);
+continuation = Attractors.RAFM(mapper);
 
 pidx = 1; #vary Kd
 fractions_curves, attractors_info = basins_fractions_continuation(
