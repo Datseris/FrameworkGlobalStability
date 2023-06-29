@@ -246,7 +246,7 @@ L = length(ylabels)
 fig, axs = subplotgrid(L, 1; ylabels, resolution = (800, 800), figure_padding = 20)
 
 for i in 1:L
-    basins_curves_plot!(axs[i, 1], fractions_container[i], pranges[i]; add_legend = false)
+    plot_basins_curves!(axs[i, 1], fractions_container[i], pranges[i]; add_legend = false)
     # legend
     entries = attractor_names[i]
     if !isnothing(entries)

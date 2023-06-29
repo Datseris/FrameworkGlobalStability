@@ -9,11 +9,9 @@ include("neural_mass_attractors.jl")
 
 # %%
 fig, axs = subplotgrid(2, 2; sharex = true, xlabels = "parameter",
-    # titles = ["BifurcationKit.jl", "Attractors.jl"],
     titles = ["Traditional continuation-based bifurcation analysis (CBA)",
     "Recurrences-based attractor find-and-match continuation (RAFM)"],
-	# ylabels = ["max(E) - step 1", "max(E) - step 2"],
-    resolution = (1600, 600)
+    resolution = (1600, 600),
 )
 
 axs[1, 1].ylabel = "max(state), step 1"
@@ -25,8 +23,6 @@ ylims!(axs[2, 2], (0, 25))
 # reduce fontsize of axis titles slightly (they are so long)
 axs[1, 1].titlesize = axs[1, 1].titlesize[] - 2
 axs[1, 2].titlesize = axs[1, 2].titlesize[] - 2
-
-fig
 
 # left comumn is BifurcationKit.jl
 
